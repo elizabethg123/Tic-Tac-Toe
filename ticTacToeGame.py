@@ -1,9 +1,9 @@
 import random
-import sqlite3 #create database and store scores
+import sqlite3 #we need to create database and store spaces and who goes first
 
 class Tictac:
     def __init__(self, name):
-        self.name = "name"
+        self.name = "name" #not done finish initializing
 
     def drawBoard(board):
             # This function prints out the board that it was passed.
@@ -23,16 +23,14 @@ class Tictac:
             print('   |   |')
 
 
-    def whoGoesFirst(): #put player pieces in database
-        # Randomly choose the player who goes first.
+    def whoGoesFirst(): #not sure how to randomly select user when both are players not computers, let me know if you know how
         if random.randint(0, 1) == 0:
             return 'X'
         else:
             return 'O'
 
 
-    def inputPlayerLetter():
-            # Lets the player type which letter they want to be.
+    def inputPlayerLetter(): #do we need this, how would it be fixed for 2 players?
             # Returns a list with the player's letter as the first item, and the computer's letter as the second.
             # the first element in the tuple is the player's letter, the second is the computer's letter.
             if letter == 'X':
@@ -42,7 +40,7 @@ class Tictac:
 
 
 
-    def playAgain():
+    def playAgain(): #we can remove this or both players would have to say yes, this might get complicated
             # This function returns True if the player wants to play again, otherwise it returns False.
             print('Do you want to play again? (yes or no)')
             return input().lower().startswith('y')
@@ -129,15 +127,10 @@ class Tictac:
                             print('The game is a tie!')
                             break
                         else:
-                            turn = 'computer'
+                            turn = 'other user' #switch to their username
 
 
                 else:
-                    # Computer's turn.
-                    move = getComputerMove(theBoard, computerLetter)
-                    makeMove(theBoard, computerLetter, move)
-
-
                     if isWinner(theBoard, computerLetter):
                         drawBoard(theBoard)
                         print('The computer has beaten you! You lose.')
