@@ -73,13 +73,13 @@ def application(environ, start_response):
     elif path == '/play':
         pl=True
         cursor.execute('''UPDATE users SET playing = ? WHERE username = ? ''',(pl, un)) #update user from not playing to playing
-        ok= cursor.execute('SELECT * FROM users WHERE pl = ? and pr = ?', [True, '']).fetchall() #check if anyone else needs partner
+        ok= cursor.execute('SELECT * FROM users WHERE playing = ? and partner = ?', [True, '']).fetchall() #check if anyone else needs partner
         if(ok):
-            pr= cursor.execute('''SELECT username FROM users WHERE pl = ? and pr = ?''', (True, '',))
+            pr= cursor.execute('''SELECT username FROM users WHERE playing = ? and pr = ?''', (True, '',))
             cursor.execute('''UPDATE users SET partner = ? WHERE username = ? ''', (pr, un))#set pr to other persons username
         else:
             pass #change later to start game where they make first move before getting partner
-        return ['playing {} partner {}'.format(pl,pr).encode()]
+        return ['playing {} partner {}'.format(pl,pr).encode("utf-8")]
     ###############################send user to game here####################################
     elif path == '/':
         login_form = '''
