@@ -1,5 +1,4 @@
 import random
-import sqlite3 #we need to create database and store spaces and who goes first
 
 class Tictac:
     def __init__(self, name):
@@ -80,15 +79,6 @@ class Tictac:
             return board[move] == ' '
 
 
-    def getPlayerMove(board):
-            # Let the player type in his move.
-            move = ' '
-            while move not in '1 2 3 4 5 6 7 8 9'.split() or not isSpaceFree(board, int(move)):
-                print('What is your next move? (1-9)')
-                move = input()
-            return int(move)
-
-
     def isBoardFull(board):
             # Return True if every space on the board has been taken. Otherwise return False.
             for i in range(1, 10):
@@ -133,7 +123,7 @@ class Tictac:
                 else:
                     if isWinner(theBoard, computerLetter):
                         drawBoard(theBoard)
-                        print('The computer has beaten you! You lose.')
+                        print('other player has beaten you! You lose.') #other player name
                         gameIsPlaying = False
                     else:
                         if isBoardFull(theBoard):
