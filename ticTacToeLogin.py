@@ -22,7 +22,7 @@ def application(environ, start_response):
     pw = params['password'][0] if 'password' in params else None
     pl = False
     pr = ''
-
+#
     if path == '/register' and un and pw:
         user = cursor.execute('SELECT * FROM users WHERE username = ?', [un]).fetchall()
         if user:
