@@ -123,7 +123,7 @@ def storeScores():
     connection.commit()
 
 def showScores():
-    pass 
+    pass
 
 print('Welcome to Tic Tac Toe!')
 print('Enter name, player 1')
