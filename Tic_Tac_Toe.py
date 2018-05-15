@@ -1,3 +1,5 @@
+#Got it mostly figured out; just need to figure out how to switch
+#from one player's turn to the second player.
 import random
 
 def drawBoard(board):
@@ -73,43 +75,18 @@ def isSpaceFree(board, move):
 def getPlayer1Move(board):
     # Let the player type in his move.
     move = ' '
-    while move not in '1 2 3 4 5 6 7 8 9'.split()or not isSpaceFree(board, int(move)):
+    while move not in '1 2 3 4 5 6 7 8 9'.split():
         print('What is your next move, ' + player1 + '? (1-9)')
         move = input()
     return int(move)
 
-    def getPlayer2Move(board):
-        # Let the player type in his move.
-        move = ' '
-        while move not in '1 2 3 4 5 6 7 8 9'.split() or not isSpaceFree(board, int(move)):
-            print('What is your next move, ' + player2 + '? (1-9)')
-            move = input()
-        return int(move)
-
-    def getplayer1Move(board, player1Letter):
-        # Given a board and the computer's letter, determine where to move and return that move.
-        if player1Letter == 'X':
-            player2Letter = 'O'
-        else:
-            player2Letter = 'X'
-
-    # Here is our algorithm for our Tic Tac Toe AI:
-    # First, check if we can win in the next move
-    for i in range(1, 10):
-        copy = getBoardCopy(board)
-        if isSpaceFree(copy, i):
-            makeMove(copy, player2Letter, i)
-            if isWinner(copy, player2Letter):
-                return i
-
-    # Check if the player could win on his next move, and block them.
-    else:
-        for i in range(1, 10):
-            copy = getBoardCopy(board)
-            if isSpaceFree(copy, i):
-                makeMove(copy, player1Letter, i)
-                if isWinner(copy, player1Letter):
-                    return i
+def getPlayer2Move(board):
+    # Let the player type in his move.
+    move = ' '
+    while move not in '1 2 3 4 5 6 7 8 9'.split():
+        print('What is your next move, ' + player2 + '? (1-9)')
+        move = input()
+    return int(move)
 
 def isBoardFull(board):
     # Return True if every space on the board has been taken. Otherwise return False.
@@ -143,7 +120,7 @@ while True:
 
             if isWinner(theBoard, player1Letter):
                 drawBoard(theBoard)
-                print('Hooray! ' + player1 + 'has won the game! Sorry, ' + player2)
+                print('Hooray! ' + player1 + ' has won the game! Sorry, ' + player2)
                 gameIsPlaying = False
             else:
                 if isBoardFull(theBoard):
@@ -161,7 +138,7 @@ while True:
 
             if isWinner(theBoard, player2Letter):
                 drawBoard(theBoard)
-                print('Hooray! ' + player2 + 'has won the game! Sorry, ' + player1)
+                print('Hooray! ' + player2 + ' has won the game! Sorry, ' + player1)
                 gameIsPlaying = False
             else:
                 if isBoardFull(theBoard):
