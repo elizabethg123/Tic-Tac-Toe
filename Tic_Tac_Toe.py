@@ -1,5 +1,4 @@
-#Got it mostly figured out; just need to figure out how to switch
-#from one player's turn to the second player.
+#Got it figured out!
 import random
 
 def drawBoard(board):
@@ -146,7 +145,8 @@ while True:
                     print('The game is a tie!')
                     break
                 else:
-                    turn = 'player2'
+                    turn = 'player1'
 
     if not playAgain():
         break
+
