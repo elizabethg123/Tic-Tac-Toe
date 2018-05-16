@@ -6,6 +6,7 @@ connection = sqlite3.connect('history.db')
 stmt = "SELECT name FROM sqlite_master WHERE type='table' AND name='history'"
 cursor = connection.cursor()
 result = cursor.execute(stmt)
+
 r = result.fetchall()
 if (r == []):
     exp = 'CREATE TABLE history (p1,p2,winner,score)'
@@ -50,9 +51,9 @@ def inputPlayerLetter():
 def whoGoesFirst():
     # Randomly choose the player who goes first.
     if random.randint(0, 1) == 0:
-        return player2
+        return 'player1'
     else:
-        return player1
+        return 'player2'
 
 def playAgain():
     # This function returns True if the player wants to play again, otherwise it returns False.
@@ -160,13 +161,10 @@ while True:
                 drawBoard(theBoard)
                 print('Hooray! ' + player1 + ' has won the game! Sorry, ' + player2)
                 gameIsPlaying = False
-                player1Score += 1
             else:
                 if isBoardFull(theBoard):
                     drawBoard(theBoard)
                     print('The game is a tie!')
-                    player1Score += 1
-                    player2Score += 1
                     break
                 else:
                     turn = 'player2'
@@ -180,7 +178,6 @@ while True:
             if isWinner(theBoard, player2Letter):
                 drawBoard(theBoard)
                 print('Hooray! ' + player2 + ' has won the game! Sorry, ' + player1)
-                player2Score += 1
                 gameIsPlaying = False
             else:
                 if isBoardFull(theBoard):
