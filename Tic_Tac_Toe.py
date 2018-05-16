@@ -161,10 +161,13 @@ while True:
                 drawBoard(theBoard)
                 print('Hooray! ' + player1 + ' has won the game! Sorry, ' + player2)
                 gameIsPlaying = False
+                player1Score += 1
             else:
                 if isBoardFull(theBoard):
                     drawBoard(theBoard)
                     print('The game is a tie!')
+                    player1Score += 1
+                    player2Score += 1
                     break
                 else:
                     turn = 'player2'
@@ -178,6 +181,7 @@ while True:
             if isWinner(theBoard, player2Letter):
                 drawBoard(theBoard)
                 print('Hooray! ' + player2 + ' has won the game! Sorry, ' + player1)
+                player2Score += 1
                 gameIsPlaying = False
             else:
                 if isBoardFull(theBoard):
