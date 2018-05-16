@@ -1,5 +1,6 @@
 import random
 import sqlite3
+import pandas as pd
 
 connection = sqlite3.connect('history.db')
 stmt = "SELECT name FROM sqlite_master WHERE type='table' AND name='history'"
@@ -119,11 +120,14 @@ def storeScores():
 
     score = str(player1Score) + '-' + str(player2Score)
 
-    connection.execute('INSERT INTO users VALUES (?, ?, ?, ?)', [player1, player2, winner, score])
+    connection.execute('INSERT INTO history VALUES (?, ?, ?, ?)', [player1, player2, winner, score])
     connection.commit()
 
 def showScores():
-    pass
+    v=(pd.read_sql_query("SELECT * FROM history", connection))
+    v.columns = ['Player 1', 'Player 2', 'Winner', 'Score']
+    print()
+    print(v)
 
 print('Welcome to Tic Tac Toe!')
 print('Enter name, player 1')
@@ -187,5 +191,8 @@ while True:
         leaderboard=input()
         if(leaderboard=="yes"):
             showScores()
+            print("\nPress any key when you would like to exit")
+            r=input()
+            break
         else:
             break
