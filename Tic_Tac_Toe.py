@@ -122,6 +122,11 @@ def storeScores():
 
     connection.execute('INSERT INTO history VALUES (?, ?, ?, ?)', [player1, player2, winner, score])
     connection.commit()
+    if(winner=="Tie"):
+        print("It was a tie!")
+    else:
+        print("The winner is " + winner + "!")
+    print("The score is " + score + ".")
 
 def showScores():
     v=(pd.read_sql_query("SELECT * FROM history", connection))
