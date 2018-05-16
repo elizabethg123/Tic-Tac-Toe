@@ -1,5 +1,20 @@
-#Got it figured out!
 import random
+import sqlite3
+
+connection = sqlite3.connect('history.db')
+stmt = "SELECT name FROM sqlite_master WHERE type='table' AND name='history'"
+cursor = connection.cursor()
+result = cursor.execute(stmt)
+r = result.fetchall()
+if (r == []):
+    exp = 'CREATE TABLE history (p1,p2,winner,score)'
+    connection.execute(exp)
+
+player1Score = 0
+player2Score = 0
+winner=''
+player1=''
+player2=''
 
 def drawBoard(board):
     # This function prints out the board that it was passed.
@@ -34,9 +49,9 @@ def inputPlayerLetter():
 def whoGoesFirst():
     # Randomly choose the player who goes first.
     if random.randint(0, 1) == 0:
-        return 'player2'
+        return player2
     else:
-        return 'player1'
+        return player1
 
 def playAgain():
     # This function returns True if the player wants to play again, otherwise it returns False.
@@ -94,6 +109,21 @@ def isBoardFull(board):
             return False
     return True
 
+def storeScores():
+    if (player1Score > player2Score):
+        winner = player1
+    elif (player2Score > player1Score):
+        winner = player2
+    else:
+        winner = "Tie"
+
+    score = str(player1Score) + '-' + str(player2Score)
+
+    connection.execute('INSERT INTO users VALUES (?, ?, ?, ?)', [player1, player2, winner, score])
+    connection.commit()
+
+def showScores():
+    pass
 
 print('Welcome to Tic Tac Toe!')
 print('Enter name, player 1')
@@ -121,10 +151,13 @@ while True:
                 drawBoard(theBoard)
                 print('Hooray! ' + player1 + ' has won the game! Sorry, ' + player2)
                 gameIsPlaying = False
+                player1Score += 1
             else:
                 if isBoardFull(theBoard):
                     drawBoard(theBoard)
                     print('The game is a tie!')
+                    player1Score += 1
+                    player2Score += 1
                     break
                 else:
                     turn = 'player2'
@@ -138,6 +171,7 @@ while True:
             if isWinner(theBoard, player2Letter):
                 drawBoard(theBoard)
                 print('Hooray! ' + player2 + ' has won the game! Sorry, ' + player1)
+                player2Score += 1
                 gameIsPlaying = False
             else:
                 if isBoardFull(theBoard):
@@ -148,5 +182,10 @@ while True:
                     turn = 'player1'
 
     if not playAgain():
-        break
-
+        storeScores()
+        print("Would you like to see the history?(yes/no)")
+        leaderboard=input()
+        if(leaderboard=="yes"):
+            showScores()
+        else:
+            break
