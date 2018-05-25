@@ -130,9 +130,9 @@ def showScores():
     print(v)
 
 print('Welcome to Tic Tac Toe!')
-print('Enter name, player 1')
+print('Enter name, player 1:')
 player1 = input()
-print('Who\'s your opponent, ' + player1)
+print('Who\'s your opponent, ' + player1  + '?')
 player2 = input()
 print('Welcome, ' + player1 + ' and ' + player2 + '!')
 
@@ -153,7 +153,7 @@ while True:
 
             if isWinner(theBoard, player1Letter):
                 drawBoard(theBoard)
-                print('Hooray! ' + player1 + ' has won the game! Sorry, ' + player2)
+                print('Hooray! ' + player1 + ' has won the game! Sorry, ' + player2 + '.')
                 gameIsPlaying = False
                 player1Score += 1
             else:
@@ -174,7 +174,7 @@ while True:
 
             if isWinner(theBoard, player2Letter):
                 drawBoard(theBoard)
-                print('Hooray! ' + player2 + ' has won the game! Sorry, ' + player1)
+                print('Hooray! ' + player2 + ' has won the game! Sorry, ' + player1 + '.')
                 player2Score += 1
                 gameIsPlaying = False
             else:
@@ -187,11 +187,11 @@ while True:
 
     if not playAgain():
         storeScores()
-        print("Would you like to see the history?(yes/no)")
+        print("Would you like to see the history? (Enter yes/no)")
         leaderboard=input()
         if(leaderboard=="yes"):
             showScores()
-            print("\nPress any key when you would like to exit")
+            print("\nPress any key when you would like to exit.")
             r=input()
             break
         else:
